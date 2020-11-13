@@ -8,29 +8,34 @@ public class TemperatureSeriesAnalysis {
 
     public double[] temperatureSeries;
     private int arrayLength;
-    final double lowerEdge = -273;
+    final double lowerEdge = -273.0;
 
     public TemperatureSeriesAnalysis() {
         this.temperatureSeries = null;
         this.arrayLength = 0;
     }
 
-    public TemperatureSeriesAnalysis(double[] temperatureSeries) throws InputMismatchException {
+    public TemperatureSeriesAnalysis(double[] temperatureSeries)
+            throws InputMismatchException {
         this.checkMinTemp(temperatureSeries);
         this.arrayLength = temperatureSeries.length;
-        this.temperatureSeries = Arrays.copyOf(temperatureSeries, this.arrayLength);
+        this.temperatureSeries = Arrays.copyOf(temperatureSeries,
+                this.arrayLength);
     }
 
     public void checkArray() throws IllegalArgumentException {
         if (this.arrayLength == 0) {
-            throw new IllegalArgumentException("Empty temperature series error!");
+            throw new IllegalArgumentException(
+                    "Empty temperature series error!");
         }
     }
 
-    public void checkMinTemp(double[] temperatureArray) throws InputMismatchException {
-        for (double temperature: temperatureArray){
+    public void checkMinTemp(double[] temperatureArray)
+            throws InputMismatchException {
+        for (double temperature: temperatureArray) {
             if (temperature < lowerEdge) {
-                throw new InputMismatchException("Temperature can't be below absolute zero!");
+                throw new InputMismatchException(
+                        "Temperature can't be below absolute zero!");
             }
         }
     }
@@ -50,7 +55,7 @@ public class TemperatureSeriesAnalysis {
     public double deviation() throws IllegalArgumentException {
         this.checkArray();
 
-        double mean = this. average();
+        double mean = this.average();
         double meanDistanceSum = 0;
 
         for (int i = 0; i < this.arrayLength; ++i) {
@@ -88,11 +93,13 @@ public class TemperatureSeriesAnalysis {
         return maximal;
     }
 
-    public double findTempClosestToZero() throws IllegalArgumentException {
+    public double findTempClosestToZero()
+            throws IllegalArgumentException {
         return this.findTempClosestToValue(0);
     }
 
-    public double findTempClosestToValue(double tempValue) throws IllegalArgumentException {
+    public double findTempClosestToValue(double tempValue)
+            throws IllegalArgumentException {
         this.checkArray();
 
         double closest = 0;
@@ -111,7 +118,8 @@ public class TemperatureSeriesAnalysis {
         return closest;
     }
 
-    public double[] findTempsLessThen(double tempValue) throws IllegalArgumentException {
+    public double[] findTempsLessThen(double tempValue)
+            throws IllegalArgumentException {
         this.checkArray();
 
         int newLength = 0;
@@ -133,7 +141,8 @@ public class TemperatureSeriesAnalysis {
         return newArray;
     }
 
-    public double[] findTempsGreaterThen(double tempValue) throws IllegalArgumentException {
+    public double[] findTempsGreaterThen(double tempValue)
+            throws IllegalArgumentException {
         this.checkArray();
 
         int newLength = 0;
@@ -154,21 +163,24 @@ public class TemperatureSeriesAnalysis {
         return newArray;
     }
 
-    public TempSummaryStatistics summaryStatistics() throws IllegalArgumentException {
+    public TempSummaryStatistics summaryStatistics()
+            throws IllegalArgumentException {
         this.checkArray();
 
         double avgTemp = this.average();
         double devTemp = this.deviation();
         double minTemp = this.min();
         double maxTemp = this.max();
-        return new TempSummaryStatistics(avgTemp, devTemp, minTemp, maxTemp);
+        return new TempSummaryStatistics(avgTemp, devTemp,
+                minTemp, maxTemp);
     }
 
     public int addTemps(double... temps) throws InputMismatchException {
         this.checkMinTemp(temps);
 
         int addLength = temps.length;
-        this.temperatureSeries = Arrays.copyOf(this.temperatureSeries, this.arrayLength + addLength);
+        this.temperatureSeries = Arrays.copyOf(this.temperatureSeries,
+                this.arrayLength + addLength);
 
         int index = this.arrayLength;
         for (double temperature: temps) {

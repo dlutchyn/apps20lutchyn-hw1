@@ -2,7 +2,6 @@ package ua.edu.ucu.tempseries;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import org.junit.Ignore;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -158,10 +157,10 @@ public class TemperatureSeriesAnalysisTest {
 
         TempSummaryStatistics summary = seriesAnalysis.summaryStatistics();
 
-        assertEquals(summary.avgTemp, avgTemp, 0.00001);
-        assertEquals(summary.devTemp, devTemp, 0.00001);
-        assertEquals(summary.minTemp, minTemp, 0.00001);
-        assertEquals(summary.maxTemp, maxTemp, 0.00001);
+        assertEquals(summary.getAvgTemp(), avgTemp, 0.00001);
+        assertEquals(summary.getDevTemp(), devTemp, 0.00001);
+        assertEquals(summary.getMinTemp(), minTemp, 0.00001);
+        assertEquals(summary.getMaxTemp(), maxTemp, 0.00001);
     }
 
 }
